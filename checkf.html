@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<body>
+<canvas id="DemoCanvas" width="500" height="400" style="border:2px solid grey;"></canvas>  
+<button id="clearbtn" onclick="undo1()">Undo</button>
+<p id="demo"></p>
+<script>
+var canvas = document.getElementById('DemoCanvas');
+//Always check for properties and methods, to make sure your code doesn't break in other browsers.
+  var context = canvas.getContext('2d');
+  //small event listner for adding rectangle
+  canvas.addEventListener('click',onclick,false);
+  
+ 
+  var columns=[]; //for storing co-ordinates in this array
+  function onclick(e){
+
+    var cx=event.pageX;
+    var cy=event.pageY;
+    context.fillStyle="black";
+    context.fillRect(cx-15,cy-15,15,15);
+    //counting mouse click by using arrays
+    columns.push(cx,cy);  
+    //this is for storing mouse value into co-ordinates
+     //document.getElementById("demo").innerHTML=columns;
+    var count=columns.length/2;
+    document.getElementById("demo").innerHTML="No of Rectangle: "+count;
+
+
+    // my own created logic to delete column and decrease it's count side by side on click of button
+    var clrbtn=document.getElementById("clearbtn");
+     clrbtn.onclick=function(){
+          var arrlen=columns.length-1;
+           context.clearRect(columns[arrlen-1]-15,columns[arrlen]-15,15,15);
+      columns.splice(-2,2);
+      //document.getElementById("").innerHTML=columns;
+    var count=columns.length/2;
+    document.getElementById("demo").innerHTML="No of Rect: "+count;
+     }
+
+  }
+</script>
+
+</body>
+</html>
